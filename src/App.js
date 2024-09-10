@@ -1,19 +1,20 @@
-import { useState ,useEffect } from "react";
+
+import useFetch from "./hooks/useFetch";
 
 function App() {
-  const [data, setData] = useState(null);
-
-  useEffect(() => {
-    fetch("https://jsonplaceholder.typicode.com/todos")
-      .then((res) => res.json())
-      .then((data) => setData(data));
- }, []);
-
+const [veri]=useFetch("https://jsonplaceholder.typicode.com/todos")
+const [yorumlar]=useFetch("https://jsonplaceholder.org/comments")
   return (
     <>
-      {data &&
-        data.map((item) => {
+      {veri &&
+        veri.map((item) => {
           return <p key={item.id}>{item.title}</p>;
+        })}
+
+
+             {yorumlar &&
+        yorumlar.map((item) => {
+          return <p key={item.id}>{item.comment}</p>;
         })}
     </>
   );

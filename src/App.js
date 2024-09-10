@@ -1,11 +1,24 @@
-
+import { useState ,useEffect } from "react";
 
 function App() {
-  return (
-    <div className="App">
+  const [data, setData] = useState(null);
 
-    </div>
+  useEffect(() => {
+    fetch("https://jsonplaceholder.typicode.com/todos")
+      .then((res) => res.json())
+      .then((data) => setData(data));
+ }, []);
+
+  return (
+    <>
+      {data &&
+        data.map((item) => {
+          return <p key={item.id}>{item.title}</p>;
+        })}
+    </>
   );
+
+
 }
 
 export default App;
